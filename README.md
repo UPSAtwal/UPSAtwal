@@ -18,7 +18,7 @@
 
 ## Github Stats
 
-![Uday's GitHub stats](https://github-readme-stats.vercel.app/api?username=upsatwal&theme=transparent&hide_rank)
+![Uday's GitHub stats](https://github-readme-stats.vercel.app/api?username=upsatwal&theme=transparent&hide=hide_rank)
 
 ## This Week's Stats
 
