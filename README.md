@@ -1,7 +1,5 @@
 # Uday! 🌅
 
-<div style="text-align: center;">
-
 ```ASCII
 :::    :::  :::::::::       :::      :::   ::: 
 :+:    :+:  :+:    :+:    :+: :+:    :+:   :+: 
@@ -23,5 +21,3 @@
 ## This Week's Stats
 
 ![Uday's Wakatime Stats](https://wakatime.com/badge/user/30896d01-87de-4cb2-95e2-35607321e513.svg)
-
-</div>
