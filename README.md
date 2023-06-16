@@ -2,6 +2,9 @@
 
 ```ASCII Art
 
+            github.com/upsatwal                            uday.codes
+
+
 888     888        888                       
 888     888        888                       
 888     888        888                       
@@ -18,13 +21,13 @@ Y88b. .d88P   Y88b 888   888  888   Y88b 888 ⠀⠀⠀⠀⠈⠻⣷⣄⠀⠀⠈�
 
 ```
 
-## Most Used Langs
+## Github Profile Statistics
 
 ![Uday's Most Used Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=upsatwal&theme=transparent&layout=donut-vertical)
 
-## Github Stats
-
 ![Uday's GitHub stats](https://github-readme-stats.vercel.app/api?username=upsatwal&theme=transparent&hide_rank=true)
+
+### Detailed Code Staticstics
 
 ## This Week's Stats
 
