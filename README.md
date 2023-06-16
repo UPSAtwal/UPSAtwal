@@ -23,12 +23,8 @@ Y88b. .d88P   Y88b 888   888  888   Y88b 888 ⠀⠀⠀⠀⠈⠻⣷⣄⠀⠀⠈�
 
 ## Github Profile Statistics
 
-![Uday's Most Used Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=upsatwal&theme=transparent&layout=donut-vertical)
+![Uday's Github Stats](./github-metrics.svg)
 
-![Uday's GitHub stats](https://github-readme-stats.vercel.app/api?username=upsatwal&theme=transparent&hide_rank=true)
-
-### Detailed Code Staticstics
-
-## This Week's Stats
+## This Week's Stats - Wakatime
 
 ![Uday's Wakatime Stats](https://wakatime.com/badge/user/30896d01-87de-4cb2-95e2-35607321e513.svg)
