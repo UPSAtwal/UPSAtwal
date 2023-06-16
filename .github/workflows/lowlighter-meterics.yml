@@ -31,6 +31,7 @@ jobs:
           base_indepth: yes
           config_display: large
           config_octicon: yes
+          config_presets: "@lunar-red"
           config_timezone: Asia/Kolkata
           plugin_achievements: yes
           plugin_achievements_display: detailed
@@ -78,11 +79,10 @@ jobs:
           plugin_screenshot_selector: body
           plugin_screenshot_title: uday.codes
           plugin_screenshot_url: https://uday.codes
-          plugin_screenshot_viewport: {
-  "width": 1280,
-  "height": 1280
-}
-
+#          plugin_screenshot_viewport: {
+#  "width": 1280,
+#  "height": 1280
+#}
           plugin_stargazers: yes
           plugin_stargazers_charts: yes
           plugin_stargazers_charts_type: classic
