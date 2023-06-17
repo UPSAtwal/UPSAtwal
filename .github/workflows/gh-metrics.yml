@@ -77,15 +77,16 @@ jobs:
           plugin_people_size: 28
           plugin_people_types: followers
           plugin_repositories: yes
-          plugin_repositories_order: featured, pinned, starred, random
-          plugin_repositories_starred: 4
+          plugin_repositories_order: pinned, featured, starred, random
+          plugin_repositories_pinned: 4
+          plugin_repositories_affiliations: owner, collaborator, organization_member
           plugin_stargazers: yes
           plugin_stargazers_charts: yes
           plugin_stargazers_charts_type: classic
           plugin_stargazers_days: 14
           plugin_wakatime: yes
           plugin_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}
-          plugin_wakatime_days: 30
+          plugin_wakatime_days: 7
           plugin_wakatime_limit: 5
           plugin_wakatime_repositories_visibility: public
           plugin_wakatime_sections: time, projects, projects-graphs, editors, os
