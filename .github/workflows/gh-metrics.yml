@@ -22,6 +22,8 @@ jobs:
           #  - read:packages (for some packages related data)
           #  - repo          (optional, if you want to include private repositories)
           token: ${{ secrets.METERICS_TOKEN }} #misspelt token, oops
+          output_action: commit
+          committer_branch: main
           commiter_message: "🛠 Chore: Update metrics"
           config_padding: 0, -3%
           config_output: markdown-pdf
