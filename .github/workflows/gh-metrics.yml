@@ -22,9 +22,9 @@ jobs:
           #  - read:packages (for some packages related data)
           #  - repo          (optional, if you want to include private repositories)
           token: ${{ secrets.METERICS_TOKEN }} #misspelt token, oops
-          output_action: commit
-          committer_branch: main
-          commiter_message: "🛠 Chore: Update metrics"
+          # output_action: commit
+          # committer_branch: main
+          # commiter_message: "🛠 Chore: Update metrics"
           # config_padding: 0, -1% # keeps breaking
 
           # config_output: markdown-pdf # not supported with these plugins
@@ -38,6 +38,7 @@ jobs:
           config_display: large
           config_octicon: yes
           config_presets: "@lunar-red" # red
+
           # config_presets: https://github.com/UPSAtwal/UPSAtwal/raw/main/metrics-preset-catpucchin.yml
           config_timezone: Asia/Kolkata
           plugin_achievements: yes
