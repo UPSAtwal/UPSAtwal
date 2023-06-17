@@ -81,6 +81,7 @@ jobs:
           plugin_stargazers_charts_type: classic
           plugin_stargazers_days: 14
           plugin_wakatime: yes
+          plugin_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}
           plugin_wakatime_days: 365
           plugin_wakatime_limit: 5
           plugin_wakatime_repositories_visibility: all
