@@ -1,5 +1,4 @@
-# Visit https://github.com/lowlighter/metrics#-documentation for full reference
-name: gh-lowlighter-metrics
+name: gh-metrics
 on:
   # Schedule updates (each hour)
   schedule: [{cron: "0 * * * *"}]
@@ -23,6 +22,8 @@ jobs:
           #  - read:packages (for some packages related data)
           #  - repo          (optional, if you want to include private repositories)
           token: ${{ secrets.METERICS_TOKEN }} #misspelt token, oops
+          commiter_message: "🛠 Chore: Update metrics"
+          config_padding: 0, -5%
 
           # Options
           user: upsatwal
@@ -31,7 +32,7 @@ jobs:
           base_indepth: yes
           config_display: large
           config_octicon: yes
-          config_presets: "@lunar-red"
+          config_presets: "@lunar-red" # custom theme on the way
           config_timezone: Asia/Kolkata
           plugin_achievements: yes
           plugin_achievements_display: detailed
@@ -87,4 +88,4 @@ jobs:
           plugin_activity_days: 0
           plugin_activity_filter: issue, pr, release, fork, review, ref/create
           plugin_activity_visibility: public
-
+          
