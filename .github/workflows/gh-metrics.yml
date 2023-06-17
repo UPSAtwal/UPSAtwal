@@ -25,7 +25,7 @@ jobs:
           output_action: commit
           committer_branch: main
           commiter_message: "🛠 Chore: Update metrics"
-          config_padding: 0, -3%
+          config_padding: 0, -1%
 
           # config_output: markdown-pdf # not supported with these plugins
           # config_base64: yes # for pdf rendering
@@ -94,3 +94,7 @@ jobs:
           plugin_activity_days: 0
           plugin_activity_filter: issue, pr, release, fork, review, ref/create
           plugin_activity_visibility: public
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_token: ${{ secrets.PAGESPEED_TOKEN }}
+          plugin_pagespeed_url: https://uday.codes
