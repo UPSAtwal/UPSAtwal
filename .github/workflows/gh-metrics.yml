@@ -25,7 +25,7 @@ jobs:
           output_action: commit
           committer_branch: main
           commiter_message: "🛠 Chore: Update metrics"
-          config_padding: 0, -1%
+          # config_padding: 0, -1% # keeps breaking
 
           # config_output: markdown-pdf # not supported with these plugins
           # config_base64: yes # for pdf rendering
