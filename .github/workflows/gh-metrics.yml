@@ -37,7 +37,8 @@ jobs:
           base_indepth: yes
           config_display: large
           config_octicon: yes
-          config_presets: "@lunar-red" # custom theme on the way
+          # config_presets: "@lunar-red" # red
+          config_presets: https://github.com/UPSAtwal/UPSAtwal/raw/main/metrics-preset-catpucchin.yml
           config_timezone: Asia/Kolkata
           plugin_achievements: yes
           plugin_achievements_display: detailed
