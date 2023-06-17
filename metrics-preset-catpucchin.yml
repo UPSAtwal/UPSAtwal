@@ -1,0 +1,26 @@
+schema: v1
+name: Catpuchhin
+description: A preset based on Catpucchin colors (Lavender)
+author: upsatwal
+with:
+  plugin_isocalendar: yes
+  plugin_isocalendar_duration: full-year
+  extras_css: |
+    .field svg {
+      fill: #B4BEFE;
+    }
+    .field {
+      color: #833255;
+    }
+    h1, h2, h3 {
+      color: #d20f39 !important;
+    }
+  extras_js: |
+    for (const {a, b} of [
+      {a:"#216e39", b:"#d20f39"},
+      {a:"#30a14e", b:"#ef9f76"},
+      {a:"#40c463", b:"#eed49f"},
+      {a:"#9be9a8", b:"#A2D8F1"},
+      {a:"#ebedf0", b:"#cdc4f5"},
+    ])
+    document.querySelectorAll(`svg g [fill="${a}"]`).forEach(node => node.setAttribute("fill", b))
