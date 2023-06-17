@@ -23,7 +23,9 @@ jobs:
           #  - repo          (optional, if you want to include private repositories)
           token: ${{ secrets.METERICS_TOKEN }} #misspelt token, oops
           commiter_message: "🛠 Chore: Update metrics"
-          config_padding: 0, -5%
+          config_padding: 0, -3%
+          config_output: markdown-pdf
+          config_base64: yes
 
           # Options
           user: upsatwal
