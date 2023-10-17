@@ -1,4 +1,8 @@
-# Uday! 🌅
+# Uday 
+
+## Github Profile Statistics
+
+![Uday's Github Stats](./github-metrics.svg)
 
 ```ASCII Art
 
@@ -20,7 +24,3 @@ Y88b. .d88P   Y88b 888   888  888   Y88b 888 ⠀⠀⠀⠀⠈⠻⣷⣄⠀⠀⠈�
             "Sunrise, Parabellum"
 
 ```
-
-## Github Profile Statistics
-
-![Uday's Github Stats](./github-metrics.svg)
