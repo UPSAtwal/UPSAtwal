@@ -4,6 +4,10 @@
 
 ![Uday's Github Stats](./github-metrics.svg)
 
+<details>
+<summary><h2>Cool Stuff</h2></summary>
+<br>
+            
 ```ASCII Art
 
             github.com/upsatwal                            uday.codes
@@ -24,3 +28,5 @@ Y88b. .d88P   Y88b 888   888  888   Y88b 888 ⠀⠀⠀⠀⠈⠻⣷⣄⠀⠀⠈�
             "Sunrise, Parabellum"
 
 ```
+
+</details>
