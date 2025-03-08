@@ -1,6 +1,6 @@
 name: gh-metrics
 on:
-  # Schedule updates (each hour)
+  # Schedule updates (midnight UTC)
   schedule: [{cron: "0 0 * * *"}]
   # Lines below let you run workflow manually and on each commit
   workflow_dispatch:
