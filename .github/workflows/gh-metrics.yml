@@ -11,6 +11,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Install Git
+        run: sudo apt-get update && sudo apt-get install -y git
+        
       - uses: upsatwal/gh-metrics@main
         with:
           # Your GitHub token
@@ -21,7 +24,7 @@ jobs:
           #  - read:user     (for user related data)
           #  - read:packages (for some packages related data)
           #  - repo          (optional, if you want to include private repositories)
-          token: ${{ secrets.METERICS_TOKEN }} #misspelt token, oops
+          token: METERICS_TOKEN }} #misspelt token, oops
           # output_action: commit
           # committer_branch: main
           # commiter_message: "🛠 Chore: Update metrics"
@@ -92,13 +95,13 @@ jobs:
           plugin_wakatime_sections: time, projects, projects-graphs, editors, os
           plugin_wakatime_url: https://wakatime.com
           plugin_wakatime_user: upsatwal
-          
+
           #plugin_activity: yes
           #plugin_activity_limit: 8
           #plugin_activity_days: 0
           #plugin_activity_filter: issue, pr, release, fork, review, ref/create
           #plugin_activity_visibility: public
-          
+
           plugin_pagespeed: yes
           plugin_pagespeed_detailed: yes
           plugin_pagespeed_token: ${{ secrets.PAGESPEED_TOKEN }}
