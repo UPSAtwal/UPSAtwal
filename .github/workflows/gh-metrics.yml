@@ -24,7 +24,7 @@ jobs:
           #  - read:user     (for user related data)
           #  - read:packages (for some packages related data)
           #  - repo          (optional, if you want to include private repositories)
-          token: METERICS_TOKEN }} #misspelt token, oops
+          token: ${{ secrets.METERICS_TOKEN }} #misspelt token, oops
           # output_action: commit
           # committer_branch: main
           # commiter_message: "🛠 Chore: Update metrics"
