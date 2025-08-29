@@ -10,7 +10,7 @@
             
 ```ASCII Art
 
-            github.com/upsatwal                            uday.codes
+ github.com/upsatwal            uday.codes            udayatwal.com  
 
 
 888     888        888                       
@@ -30,3 +30,4 @@ Y88b. .d88P   Y88b 888   888  888   Y88b 888 ⠀⠀⠀⠀⠈⠻⣷⣄⠀⠀⠈�
 ```
 
 </details>
+
