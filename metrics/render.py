@@ -482,7 +482,9 @@ def repo_stats(repos):
 # --------------------------------------------------------------------------- #
 
 def plural(n, word):
-    return f"{n} {word}" + ("" if n == 1 else "s")
+    if n == 1:
+        return f"1 {word}"
+    return f"{n:,} {word[:-1]}ies" if word.endswith("y") else f"{n:,} {word}s"
 
 
 def esc(text):
@@ -556,7 +558,7 @@ def draw_header(c, user, cal, avatar_b64):
     years = (dt.date.today() - dt.date.fromisoformat(user["createdAt"][:10])).days // 365
     c.add(text(PAD + 72, y + 24, user["name"] or user["login"], size=22, weight=700),
           text(PAD + 72, y + 46, f"@{user['login']} · on GitHub for {years} years · "
-               f"{user['followers']['totalCount']} followers", size=13, fill="muted"))
+               f"{plural(user['followers']['totalCount'], 'follower')}", size=13, fill="muted"))
     # Last 14 days as a strip, like the old card.
     recent = cal["days"][-14:]
     peak = max((n for _, n in recent), default=0) or 1
@@ -565,8 +567,8 @@ def draw_header(c, user, cal, avatar_b64):
         level = 0 if not n else min(4, 1 + int(3 * n / peak))
         c.add(f'<rect x="{x0 + i * 16}" y="{y + 8}" width="12" height="12" rx="2" '
               f'fill="{p["ramp"][level]}"><title>{d:%d %b}: {n}</title></rect>')
-    c.add(text(WIDTH - PAD, y + 44, f"contributed to {user['repositoriesContributedTo']['totalCount']} "
-               f"repositories", size=13, fill="muted", anchor="end"))
+    c.add(text(WIDTH - PAD, y + 44, f"contributed to {plural(user['repositoriesContributedTo']['totalCount'], 'repository')}",
+               size=13, fill="muted", anchor="end"))
     c.y += 80
 
 
@@ -575,19 +577,19 @@ def draw_columns(c, user, repos, rs):
     cols = [
         ("pulse", "Activity", [
             ("git-commit", f"{cc['totalCommitContributions'] + cc['restrictedContributionsCount']:,} commits in the last year"),
-            ("git-pull-request", f"{user['pullRequests']['totalCount']} pull requests opened"),
-            ("eye", f"{cc['totalPullRequestReviewContributions']} pull requests reviewed"),
-            ("issue-opened", f"{user['issues']['totalCount']} issues opened"),
+            ("git-pull-request", f"{plural(user['pullRequests']['totalCount'], 'pull request')} opened"),
+            ("eye", f"{plural(cc['totalPullRequestReviewContributions'], 'pull request')} reviewed"),
+            ("issue-opened", f"{plural(user['issues']['totalCount'], 'issue')} opened"),
         ]),
         ("people", "Community", [
-            ("organization", f"member of {user['organizations']['totalCount']} organizations"),
+            ("organization", f"member of {plural(user['organizations']['totalCount'], 'organization')}"),
             ("people", f"following {user['following']['totalCount']} people"),
             ("star", f"starred {user['starredRepositories']['totalCount']:,} repositories"),
             ("telescope", f"watching {user['watching']['totalCount']} repositories"),
         ]),
         ("repo", f"{len(repos)} public repositories", [
-            ("star", f"{rs['stars']} stars earned"),
-            ("repo-forked", f"{rs['forks']} forks"),
+            ("star", f"{plural(rs['stars'], 'star')} earned"),
+            ("repo-forked", plural(rs["forks"], "fork")),
             ("law", f"prefers {rs['licence']}" if rs["licence"] else "no licence preference yet"),
             ("trophy", f"most starred: {rs['top']['nameWithOwner'].split('/')[1]}" if rs["top"] else "no stars yet"),
         ]),
