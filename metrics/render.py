@@ -484,7 +484,9 @@ def repo_stats(repos):
 def plural(n, word):
     if n == 1:
         return f"1 {word}"
-    return f"{n:,} {word[:-1]}ies" if word.endswith("y") else f"{n:,} {word}s"
+    if word.endswith("y") and word[-2] not in "aeiou":
+        return f"{n:,} {word[:-1]}ies"
+    return f"{n:,} {word}s"
 
 
 def esc(text):
