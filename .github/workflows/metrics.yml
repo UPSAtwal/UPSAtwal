@@ -38,9 +38,21 @@ jobs:
       # commit is also what stops GitHub disabling this schedule for inactivity.
       - name: Commit
         working-directory: repo
+        # If main moved while rendering, re-apply the new files on top and retry.
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add metrics-dark.svg metrics-light.svg metrics/palette.json
-          git commit -m "Update metrics" || exit 0
-          git push
+          out="$RUNNER_TEMP/metrics-out"
+          mkdir -p "$out"
+          cp metrics-dark.svg metrics-light.svg metrics/palette.json "$out/"
+          for attempt in 1 2 3; do
+            git fetch -q --depth 1 origin main
+            git reset -q --hard origin/main
+            cp "$out"/metrics-*.svg .
+            cp "$out/palette.json" metrics/
+            git add metrics-dark.svg metrics-light.svg metrics/palette.json
+            git commit -q -m "Update metrics" || exit 0
+            git push -q origin HEAD:main && exit 0
+            sleep $((attempt * 5))
+          done
+          exit 1
