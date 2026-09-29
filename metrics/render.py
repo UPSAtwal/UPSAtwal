@@ -418,8 +418,12 @@ def calendar_stats(user):
             "per_weekday": per_weekday, "active": active}
 
 
+MIN_PUSHES = 20  # below this the rhythm chart says nothing, so leave it out
+
+
 def push_stats(pushes):
-    if not pushes:
+    if len(pushes) < MIN_PUSHES:
+        log(f"rhythm: only {len(pushes)} pushes visible, section skipped")
         return None
     hours, weekdays = [0] * 24, [0] * 7
     for p in pushes:
@@ -484,6 +488,8 @@ def plural(n, word):
         return f"1 {word}"
     if word.endswith("y") and word[-2] not in "aeiou":
         return f"{n:,} {word[:-1]}ies"
+    if word.endswith(("s", "sh", "ch", "x")):
+        return f"{n:,} {word}es"
     return f"{n:,} {word}s"
 
 
@@ -654,7 +660,7 @@ def draw_languages(c, langs, count):
 def draw_rhythm(c, ps):
     p = c.p
     c.add(section_title(PAD, c.y + 16, "clock",
-                        f"when i push · {ps['total']} pushes over the last {ps['span']} days"))
+                        f"when i push · {plural(ps['total'], 'push')} over the last {plural(ps['span'], 'day')}"))
     top, height = c.y + 40, 84
     left_w = (WIDTH - 2 * PAD) * 0.62
     bw = left_w / 24
