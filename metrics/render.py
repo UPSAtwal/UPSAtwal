@@ -75,11 +75,14 @@ def http(url, *, data=None, headers=None, timeout=60, retries=3, raw=False):
 
 
 def tokens():
+    """(name, value) pairs to try in order. Only names are ever logged."""
     seen = []
     for name in ("METRICS_TOKEN", "GITHUB_TOKEN"):
         value = os.environ.get(name, "").strip()
-        if value and value not in seen:
-            seen.append(value)
+        if not value:
+            log(f"github: {name} is not set")
+        elif value not in (v for _, v in seen):
+            seen.append((name, value))
     return seen
 
 
@@ -149,7 +152,7 @@ query($login: String!, $cursor: String) {
 
 def collect_github():
     last = None
-    for token in tokens():
+    for name, token in tokens():
         try:
             user = graphql(PROFILE_QUERY, {"login": LOGIN}, token)["user"]
             repos, cursor = [], None
@@ -161,10 +164,11 @@ def collect_github():
                 cursor = page["pageInfo"]["endCursor"]
             user["repos"] = repos
             user["pushes"] = collect_pushes(token)
+            log(f"github: using {name}")
             return user
         except Exception as err:  # try the next token
             last = err
-            log("github: token failed:", err)
+            log(f"github: {name} failed: {err}")
     raise RuntimeError(f"no working GitHub token: {last}")
 
 
