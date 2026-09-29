@@ -112,12 +112,6 @@ query($login: String!) {
     organizations { totalCount } starredRepositories { totalCount }
     watching { totalCount } pullRequests { totalCount } issues { totalCount }
     repositoriesContributedTo(contributionTypes: [COMMIT, PULL_REQUEST, ISSUE, REPOSITORY]) { totalCount }
-    pinnedItems(first: 4, types: REPOSITORY) {
-      nodes { ... on Repository {
-        nameWithOwner description stargazerCount forkCount createdAt
-        primaryLanguage { name }
-      } }
-    }
     contributionsCollection {
       totalCommitContributions restrictedContributionsCount
       totalPullRequestContributions totalIssueContributions
@@ -508,21 +502,6 @@ def icon(name, x, y, cls="accent", scale=1.0):
             f'd="{ICONS[name]}" class="{cls}f"/>')
 
 
-def wrap(value, width_px, size=13):
-    """Greedy word wrap using an average glyph width for a sans-serif face."""
-    per_line = max(10, int(width_px / (size * 0.53)))
-    lines, line = [], ""
-    for word in (value or "").split():
-        if line and len(line) + 1 + len(word) > per_line:
-            lines.append(line)
-            line = word
-        else:
-            line = f"{line} {word}".strip()
-    if line:
-        lines.append(line)
-    return lines
-
-
 def stat_line(x, y, icon_name, label):
     return icon(icon_name, x, y - 12) + text(x + 24, y, label)
 
@@ -702,27 +681,6 @@ def draw_rhythm(c, ps):
     c.y = top + height + 58
 
 
-def draw_repos(c, repos):
-    c.add(section_title(PAD, c.y + 16, "book", "featured repositories"))
-    colw = (WIDTH - 2 * PAD - 24) / 2
-    y0 = c.y + 40
-    heights = [0, 0]
-    for i, r in enumerate(repos[:4]):
-        col = i % 2
-        x = PAD + col * (colw + 24)
-        y = y0 + heights[col]
-        c.add(icon("repo", x, y - 12), text(x + 24, y, r["nameWithOwner"], weight=600, fill="accent"))
-        lines = wrap(r.get("description") or "", colw - 24, 12)[:3]
-        for k, line in enumerate(lines):
-            c.add(text(x + 24, y + 20 + k * 17, line, size=12, fill="muted"))
-        meta_y = y + 20 + len(lines) * 17 + 4
-        lang = (r.get("primaryLanguage") or {}).get("name", "")
-        meta = " · ".join(filter(None, [lang, plural(r["stargazerCount"], "star"), plural(r["forkCount"], "fork")]))
-        c.add(text(x + 24, meta_y, meta, size=12))
-        heights[col] += meta_y - y + 30
-    c.y = y0 + max(heights) - 12
-
-
 def gauge(cx, cy, score, label, p):
     r, circ = 26, 2 * 3.14159 * 26
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{p["track"]}" stroke-width="5"/>'
@@ -757,10 +715,6 @@ def draw_wakatime(c, wk):
     if wk.get("total_seconds"):
         facts += [("clock", f"{wk['human_readable_total']} this week"),
                   ("graph", f"{wk['human_readable_daily_average']} a day")]
-    if wk.get("editors"):
-        facts.append(("code", f"mostly in {wk['editors'][0]['name']}"))
-    if wk.get("operating_systems"):
-        facts.append(("device-desktop", f"on {wk['operating_systems'][0]['name']}"))
     colw = (WIDTH - 2 * PAD) / 4
     for i, (ic, label) in enumerate(facts):
         c.add(stat_line(PAD + i * colw, y, ic, label))
@@ -808,16 +762,8 @@ def main():
     avatar = safe("avatar", lambda: base64.b64encode(
         http(user["avatarUrl"] + "&s=112", raw=True)[0]).decode())
 
-    featured = [r for r in user["pinnedItems"]["nodes"] if r]
-    if len(featured) < 4:
-        pinned = {r["nameWithOwner"] for r in featured}
-        extra = sorted((r for r in user["repos"] if r["nameWithOwner"] not in pinned
-                        and r["nameWithOwner"].lower() != f"{LOGIN}/{LOGIN}".lower()),
-                       key=lambda r: (r["stargazerCount"], r["createdAt"]), reverse=True)
-        featured += extra[:4 - len(featured)]
-
     now = dt.datetime.now(TZ)
-    footer = f"updated {now:%d %b %Y, %H:%M} IST · rendered by a zero-dependency script · uday.codes"
+    footer = f"updated {now:%d %b %Y, %H:%M} IST · uday.codes"
     for mode in ("dark", "light"):
         c = Card(theme(sample, mode))
         draw_header(c, user, cal, avatar); gap(c, 8)
@@ -826,8 +772,6 @@ def main():
         draw_languages(c, langs, lang_count); gap(c)
         if ps:
             draw_rhythm(c, ps); gap(c)
-        if featured:
-            draw_repos(c, featured); gap(c)
         if speed:
             draw_pagespeed(c, speed); gap(c)
         if wk and wk.get("languages") is not None:

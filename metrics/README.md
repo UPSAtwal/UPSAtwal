@@ -4,8 +4,8 @@ Renders the stats card on this profile. `render.py` uses only the Python
 standard library, and `.github/workflows/metrics.yml` runs it daily at 00:00 IST
 with nothing but `git` and the runner's `python3`.
 
-- **Data:** GitHub GraphQL and REST, WakaTime (last 7 days) and PageSpeed
-  Insights for uday.codes. Any source that fails is left out of the card.
+- **Data:** GitHub GraphQL and REST, WakaTime (last 7 days, languages only)
+  and PageSpeed Insights for uday.codes. Any source that fails is left out of the card.
 - **Colours:** sampled from the profile picture on every run. The photo is
   averaged in 4×4 blocks, then its darkest, middle and lightest tones become the
   palette. A dominant saturated hue, if there is one, becomes the accent. The
